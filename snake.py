@@ -31,3 +31,12 @@ class Snake:
     
         self.update_head_tail()
         
+    def compare_snakes(self,list,print_snake = False):
+        """Purpose: test if body_position is storing the correct arguments
+        :param list: a list of tuples you wish to compare
+        :param print_snake: boolean indicating whether or not you want the body_position printed out
+        return: True if the lists are the same,False otherwise"""
+
+        if print_snake:
+            print(self.__body_position)
+        return self.__body_position == list
