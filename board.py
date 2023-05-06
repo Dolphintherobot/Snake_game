@@ -1,6 +1,6 @@
 
 import pygame
-import a_star as A
+
 
 
 
@@ -16,7 +16,7 @@ def get_coordinates():
 def map_to_grid(grid,width,margin,x,y):
     '''Purpose:maps a point on the gui and transfers it to the array backed grid
     Post-condtions:will modify the coordinate on the grid to become a 2'''
-    x = x//(width+margin) -4
+    x = x//(width+margin) 
     y =y//(width+margin)
     grid[x][y] = 2
 
@@ -63,16 +63,10 @@ def main(grid):
     Purpose:program that runs the gui
     :param grid: a 2d list'''
     pygame.init()
-    size = (255, 355)
+    size = (500, 500)
     screen = pygame.display.set_mode(size)
 
 
-    font_type = pygame.font.get_default_font()
-
-    font = pygame.font.Font(font_type)
-    font.set_bold(True)
-    button = pygame.Rect(0,0,500,100)
-    text = font.render("Find path",True,(255,255,255))
 
     height = 20
     width = 20    
@@ -100,10 +94,7 @@ def main(grid):
         BLACK = (0,0,0)
         BLUE = (0,0,255)
         screen.fill(BLACK)
-        pygame.draw.rect(screen,BLUE,button)
-        
         draw_squares(screen,grid,height,width,margin)
-        screen.blit(text,(80,40))
         pygame.display.flip()
     
         clock.tick(60)
