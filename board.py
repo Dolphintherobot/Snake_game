@@ -52,7 +52,7 @@ def draw_squares(screen,grid,height,width,margin):
             pygame.draw.rect(screen,
                              color,
                              [(margin + width) * column + margin,
-                              (margin + height) * row + margin+100,
+                              (margin + height) * row + margin,
                               width,
                               height])       
 
@@ -68,8 +68,8 @@ def main(grid):
 
 
 
-    height = 20
-    width = 20    
+    height = 28
+    width = 28    
     margin = 5
     
     done = False
@@ -82,14 +82,7 @@ def main(grid):
                 done = True
             elif event.type ==pygame.MOUSEBUTTONDOWN:
                 mouse_x,mouse_y = get_coordinates()
-                if 0<= mouse_x <=100:
-                    n = len(grid) - 1
-                    m = len(grid[0]) - 1
-                    start = (0,0)
-                    end = (n,m)
-                    A.find_path(grid,start,end)
-                else:
-                    map_to_grid(grid,width,margin,mouse_x,mouse_y)
+                
 
         BLACK = (0,0,0)
         BLUE = (0,0,255)
@@ -103,8 +96,8 @@ def main(grid):
     pygame.quit()
 
 
-n = 10 #how many rows 
-m = 10 #how many columns
+n = 15 #how many rows 
+m = 15 #how many columns
 grid  = [[0 for x in range(n)] for y in range(m)]
 
 main(grid)
