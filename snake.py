@@ -1,4 +1,4 @@
-class snake:
+class Snake:
     def __init__(self):
         """Purpose: create a snake class"""
         self.__body_position = []
@@ -29,4 +29,5 @@ class snake:
             start_x -=1
             start_y -=1
     
+        self.update_head_tail()
         
