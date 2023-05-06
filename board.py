@@ -38,15 +38,18 @@ def draw_squares(screen,grid,height,width,margin):
     WHITE = (255, 255, 255)
     GREEN = (0, 255, 0)
     RED = (255, 0, 0)
+    YELLOW = (255,255,0)
 
     for row in range(n):
         for column in range(m):
             color = WHITE
-            if grid[row][column] == 2:
+            if grid[row][column] == 3:
                 color = RED
-            elif grid[row][column] == 1:
+            elif grid[row][column] == 0:
                 color = GREEN
-            
+            elif grid[row][column] == 1:
+                color = YELLOW
+
 
 
             pygame.draw.rect(screen,
