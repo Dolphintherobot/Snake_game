@@ -27,9 +27,56 @@ class Snake:
         for i in range(1,5):
             self.__body_position.append((start_x,start_y))
             start_x -=1
-            start_y -=1
     
         self.update_head_tail()
+
+
+
+    
+
+    def change_pos(self):
+        '''Purpose:to modify the contents of the list such that it mimics a movement on the board
+        :Post-conditions: will change the contents of self.__body_position'''
+
+        self.__body_position.pop()
+        self.__body_position.insert(0,self.head)
+        self.update_head_tail()
+    
+
+    def move_up(self):
+        '''Purpose: to move the snake upwards by 1 unit on the board
+        :Post-conditions: will change the contents of self.__body_position'''
+
+        x,y = self.head
+        self.head = (x-1,y)
+        self.change_pos()
+    
+
+    def move_down(self):
+        '''Purpose: to move the snake downwards by 1 unit on the board
+        :Post-conditions: will change the contents of self.__body_position'''
+
+        x,y = self.head
+        self.head = (x+1,y)
+        self.change_pos()
+    
+    def move_right(self):
+        '''Purpose: to move the snake right by 1 unit on the board
+        :Post-conditions: will change the contents of self.__body_position'''
+
+        x,y = self.head
+        self.head = (x,y+1)
+        self.change_pos()
+
+    def move_left(self):
+        '''Purpose: to move the snake left by 1 unit on the board
+        :Post-conditions: will change the contents of self.__body_position'''
+
+        x,y = self.head
+        self.head = (x,y-1)
+        self.change_pos()
+
+
         
     def compare_snakes(self,list,print_snake = False):
         """Purpose: test if body_position is storing the correct arguments
@@ -40,3 +87,5 @@ class Snake:
         if print_snake:
             print(self.__body_position)
         return self.__body_position == list
+
+    
