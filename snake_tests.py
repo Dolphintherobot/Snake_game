@@ -75,7 +75,9 @@ reason = "check move up method"
 
 a_snake.move_up()
 expected = [(6,7),(7,7),(7,8),(7,7)]
-if not a_snake.compare_snakes(expected) and a_snake.head != expected[0] and a_snake.tail !=expected[-1]:
+
+
+if not a_snake.compare_snakes(expected) or a_snake.head != expected[0] or a_snake.tail !=expected[-1]:
     print(f"error with {test} reason is {reason}")
 
 
@@ -87,5 +89,78 @@ reason = "check move down method"
 
 a_snake.move_down()
 expected = [(7,7),(6,7),(7,7),(7,8)]
-if not a_snake.compare_snakes(expected,True) and a_snake.head != expected[0] and a_snake.tail !=expected[-1]:
+if not a_snake.compare_snakes(expected) or a_snake.head != expected[0] or a_snake.tail !=expected[-1]:
+    print(f"error with {test} reason is {reason}")
+
+
+
+
+
+
+#test grow
+
+
+
+test = "grow and find_valid methods"
+
+reason = "check grow method"
+
+a_snake = s.Snake()
+a_snake.create_snake(grid)
+
+a_snake.grow(grid)
+expected = [(7,7),(6,7),(5,7),(4,7),(4,6)]
+if not a_snake.compare_snakes(expected) or a_snake.head != expected[0] or a_snake.tail !=expected[-1]:
+    print(f"error with {test} reason is {reason}")
+
+
+
+
+#test grow
+
+a_snake = s.Snake()
+
+a_snake.create_snake(grid)
+#[(7,7),(6,7),(5,7),(4,7)]
+
+n = 0
+
+while n!= 11:
+    n+=1
+    a_snake.move_down()
+
+
+test = "grow and find_valid methods"
+
+reason = "check grow method when space is invalid"
+
+a_snake.grow(grid)
+expected = [(18,7),(17,7),(16,7),(15,7),(15,6)]
+if not a_snake.compare_snakes(expected) or a_snake.head != expected[0] or a_snake.tail !=expected[-1]:
+    print(f"error with {test} reason is {reason}")
+
+
+#test grow
+
+
+a_snake = s.Snake()
+
+a_snake.create_snake(grid)
+#[(7,7),(6,7),(5,7),(4,7)]
+
+a_snake.move_down()
+a_snake.move_up()
+a_snake.move_down()
+
+
+#known bug the snake can move across itself
+
+test = "grow and find_valid methods"
+
+reason = "check grow method when space is in the body_position list"
+
+a_snake.grow(grid)
+expected = [(8,7),(7,7),(8,7),(7,7),(7,6)]
+
+if not a_snake.compare_snakes(expected) or a_snake.head != expected[0] or a_snake.tail !=expected[-1]:
     print(f"error with {test} reason is {reason}")
