@@ -77,6 +77,48 @@ class Snake:
         self.change_pos()
 
 
+    def find_valid(self,grid):
+        """Purpose:will find valid spaces for new tail so that it doesnt end the game
+        :param grid: a 2d list representing the board
+        :return: valid_spaces, a list of tuples, representing valid spaces
+        """
+        x,y = self.tail
+
+        down = (x+1,y)
+        left = (x,y-1)
+        up = (x-1,y)
+        right = (x,y+1)
+
+        n = len(grid)
+        m = len(grid[0])
+
+        valid_spaces = [down,left,up,right]
+        copy = valid_spaces.copy()
+        for space in copy:
+            x,y  = space
+            if  0 >x > n or 0 >y > m or space in self.__body_position:
+                valid_spaces.remove(space)
+        
+        return valid_spaces
+
+
+            
+
+            
+    
+    def grow(self,grid):
+        '''Purpose: to mimic enlarging the snake by adding to the list 
+        :param grid: 2d list representing the board the snake is on
+        :Post-conditions:will modify the body_position list by making it larger'''
+
+        valid_spaces = self.find_valid(grid)
+        space = valid_spaces[0]
+        self.__body_position.append(space)
+        self.update_head_tail()
+
+
+
+
         
     def compare_snakes(self,list,print_snake = False):
         """Purpose: test if body_position is storing the correct arguments
