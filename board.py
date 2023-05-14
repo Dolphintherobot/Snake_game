@@ -15,12 +15,7 @@ def get_coordinates():
     y = player_position[0]
     return (x,y)
 
-def map_to_grid(grid,width,margin,x,y):
-    '''Purpose:maps a point on the gui and transfers it to the array backed grid
-    Post-condtions:will modify the coordinate on the grid to become a 2'''
-    x = x//(width+margin) 
-    y =y//(width+margin)
-    grid[x][y] = 2
+
 
 
 
@@ -52,6 +47,15 @@ def on_apple(head,apple_list):
     :return True if head is on apple,False otherwise
     """
     return head in apple_list
+
+def cover_tail(tail,grid):
+    """Purpose: set the x,y of the tail back to 2 before the snake moves, to prevent infinite growth on the board
+    :param tail: x,y coordinate, representing tail of snake
+    :param: grid: 2d list
+    :Post-conditions:will modify the board
+    """
+    x,y = tail
+    grid[x][y] = 2
 
 
 
@@ -119,6 +123,7 @@ def main(grid):
 
     while not done:
         for event in pygame.event.get():
+            cover_tail(a_snake.tail,grid)
             if event.type == pygame.QUIT:
                 done = True
             elif event.type ==pygame.MOUSEBUTTONDOWN:
