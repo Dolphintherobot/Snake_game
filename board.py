@@ -1,5 +1,7 @@
 
 import pygame
+import snake as s
+import random as rn
 
 
 
@@ -19,6 +21,37 @@ def map_to_grid(grid,width,margin,x,y):
     x = x//(width+margin) 
     y =y//(width+margin)
     grid[x][y] = 2
+
+
+
+
+def generate_apple(grid,apple_list):
+    """Purpose: to generate an x,y coordinate to mark as an apple for the snake to pick up
+    :param grid: 2d list representing the game board
+    :param apple_list: a list of x,y coordinates representing apples
+    :Post-conditions: will modify grid space to be 3 and update apple_list """
+
+    n = len(grid)
+    m = len(grid[0])
+
+    x = rn.randint(0,n-1)
+    y = rn.randint(0,m-1)
+
+    if grid[x][y] == 1:
+        generate_apple(grid,apple_list)
+    else:
+        grid[x][y] = 3
+        apple_list.append((x,y))
+
+
+
+def on_apple(head,apple_list):
+    """Purpose: check if the snake is on an apple
+    :param head: x,y coordinate, representing head of snake
+    :param: apple_list: list of x,y coordinates
+    :return True if head is on apple,False otherwise
+    """
+    return head in apple_list
 
 
 
@@ -68,8 +101,11 @@ def main(grid):
     pygame.init()
     size = (500, 500)
     screen = pygame.display.set_mode(size)
-
-
+    
+    
+    a_snake = s.Snake()
+    a_snake.create_snake(grid)
+    list_of_apples = []
 
     height = 28
     width = 28    
@@ -78,6 +114,8 @@ def main(grid):
     done = False
     clock = pygame.time.Clock()
 
+    direction = "right"
+    n = 0
 
     while not done:
         for event in pygame.event.get():
@@ -85,7 +123,32 @@ def main(grid):
                 done = True
             elif event.type ==pygame.MOUSEBUTTONDOWN:
                 mouse_x,mouse_y = get_coordinates()
-                
+            elif event.type == pygame.K_LEFT or direction == "left":
+                a_snake.move_left()
+                direction = "left"
+            elif event.type == pygame.K_RIGHT or direction == "right":
+                a_snake.move_right()
+                direction = "right"
+            elif event.type == pygame.K_DOWN or direction == "down":
+                a_snake.move_down()
+                direction = "down"
+            elif event.type == pygame.K_UP or direction == "up":
+                a_snake.move_up()
+                direction = "up"
+
+        if on_apple(a_snake.head,list_of_apples):
+            list_of_apples.remove(a_snake.head)
+            a_snake.grow()
+        
+        if n ==3:
+            generate_apple(grid)
+            n = 0
+        
+        if a_snake.game_over():
+            done = True
+
+
+
 
         BLACK = (0,0,0)
         BLUE = (0,0,255)
@@ -94,6 +157,7 @@ def main(grid):
         pygame.display.flip()
     
         clock.tick(60)
+        n +=1
  
 
     pygame.quit()
