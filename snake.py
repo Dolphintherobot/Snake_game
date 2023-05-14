@@ -96,7 +96,7 @@ class Snake:
         copy = valid_spaces.copy()
         for space in copy:
             x,y  = space
-            if  0 >x > n or 0 >y > m or space in self.__body_position:
+            if  0 > x > n or 0 >y > m or space in self.__body_position:
                 valid_spaces.remove(space)
         
         return valid_spaces
@@ -116,6 +116,22 @@ class Snake:
         self.__body_position.append(space)
         self.update_head_tail()
 
+
+
+
+    def game_over(self,grid):
+        '''Purpose to check if the snake has ran out of bounds or into itself
+        :param grid: a 2d list representing the board
+        return True if the game is over,False otherwise'''
+
+        n = len(grid)
+        m = len(grid[0])
+        x,y = self.head
+
+        out_of_bounds = x < 0 or x > n or y < 0 or y > m
+        crash = self.head in self.__body_position[1:]
+
+        return out_of_bounds or crash
 
 
 
