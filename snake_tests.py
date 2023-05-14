@@ -164,3 +164,119 @@ expected = [(8,7),(7,7),(8,7),(7,7),(7,6)]
 
 if not a_snake.compare_snakes(expected) or a_snake.head != expected[0] or a_snake.tail !=expected[-1]:
     print(f"error with {test} reason is {reason}")
+
+
+
+
+
+######################test game over
+
+
+a_snake = s.Snake()
+
+a_snake.create_snake(grid)
+#[(7,7),(6,7),(5,7),(4,7)]
+
+a_snake.move_down()
+a_snake.move_up()
+a_snake.move_down()
+#[(8,7),(7,7),(8,7),(7,7)]
+
+
+#known bug the snake can move across itself
+
+test = "game over method"
+
+reason = "check when head coordinates are in the body"
+
+expected = True
+actual = a_snake.game_over(grid)
+
+
+if actual != expected:
+    print(f"error with {test} reason is {reason}")
+
+
+
+
+
+
+a_snake = s.Snake()
+
+a_snake.create_snake(grid)
+#[(7,7),(6,7),(5,7),(4,7)]
+
+
+for n in range(15):
+    a_snake.move_down()
+
+
+
+
+
+test = "game over method"
+
+reason = "check when y coordinate is out of bounds"
+
+expected = True
+actual = a_snake.game_over(grid)
+
+
+if actual != expected:
+    print(f"error with {test} reason is {reason}")
+
+
+
+
+
+
+
+
+
+a_snake = s.Snake()
+
+a_snake.create_snake(grid)
+#[(7,7),(6,7),(5,7),(4,7)]
+
+
+for n in range(15):
+    a_snake.move_right()
+
+
+
+
+
+test = "game over method"
+
+reason = "check when x coordinate is out of bounds"
+
+expected = True
+actual = a_snake.game_over(grid)
+
+
+if actual != expected:
+    print(f"error with {test} reason is {reason}")
+
+
+
+
+
+
+a_snake = s.Snake()
+
+a_snake.create_snake(grid)
+#[(7,7),(6,7),(5,7),(4,7)
+
+
+
+
+
+test = "game over method"
+
+reason = "check when game is not over"
+expected = False
+actual = a_snake.game_over(grid)
+
+
+if actual != expected:
+    print(f"error with {test} reason is {reason}")
