@@ -133,6 +133,17 @@ class Snake:
 
         return out_of_bounds or crash
 
+    def place_snake(self,grid):
+        '''Purpose: to map the coordinates of the snake onto the grid
+        :param grid: a 2d list
+        :Post-condition: will modify the contents of the list'''
+
+        for coord in self.__body_position:
+            x,y = coord
+            grid[x][y] = 1
+
+
+
 
 
         
