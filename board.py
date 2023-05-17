@@ -111,6 +111,7 @@ def main(grid):
 
     while not done:
         for event in pygame.event.get():
+            pygame.time.set_timer(event,5000)
             cover_tail(a_snake.tail,grid)
             if event.type == pygame.QUIT:
                 done = True
