@@ -126,35 +126,38 @@ def main(grid):
     has_moved = False
     while not done:
         for event in pygame.event.get():
-            pygame.time.set_timer(event,5000)
             cover_tail(a_snake.tail,grid)
             if event.type == pygame.QUIT:
                 done = True
-                has_moved = True
-            elif event.type == pygame.K_LEFT:
-                a_snake.move_left()
-                direction = "left"
-                has_moved = True
-            elif event.type == pygame.K_RIGHT:
-                a_snake.move_right()
-                direction = "right"
-                has_moved = True
-            elif event.type == pygame.K_DOWN:
-                a_snake.move_down()
-                direction = "down"
-                has_moved = True
-            elif event.type == pygame.K_UP:
-                a_snake.move_up()
-                direction = "up"
-                has_moved = True
+
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    a_snake.move_left()
+                    direction = "left"
+                    has_moved = True
+                elif event.key == pygame.K_RIGHT:
+                    a_snake.move_right()
+                    direction = "right"
+                    has_moved = True
+                elif event.key == pygame.K_DOWN:
+                    a_snake.move_down()
+                    direction = "down"
+                    has_moved = True
+                elif event.key == pygame.K_UP:
+                    print(pygame.K_UP)
+                    a_snake.move_up()
+                    direction = "up"
+                    has_moved = True
         
 
         if not has_moved:
             default_move(direction,a_snake)
+        else:
+            has_moved = False
 
         if on_apple(a_snake.head,list_of_apples):
             list_of_apples.remove(a_snake.head)
-            a_snake.grow()
+            a_snake.grow(grid)
         
         if n ==3:
             generate_apple(grid,list_of_apples)
@@ -173,7 +176,7 @@ def main(grid):
         screen.fill(BLACK)
         draw_squares(screen,grid,height,width,margin)
         pygame.display.flip()
-    
+        pygame.time.wait(2000)
         clock.tick(60)
         n +=1
  
