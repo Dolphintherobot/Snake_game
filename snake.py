@@ -128,7 +128,7 @@ class Snake:
         m = len(grid[0])
         x,y = self.head
 
-        out_of_bounds = x < 0 or x > n or y < 0 or y > m
+        out_of_bounds = x < 0 or x > n-1 or y < 0 or y > m-1
         crash = self.head in self.__body_position[1:]
 
         return out_of_bounds or crash
