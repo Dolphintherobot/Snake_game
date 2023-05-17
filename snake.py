@@ -138,7 +138,6 @@ class Snake:
         :param grid: a 2d list
         :Post-condition: will modify the contents of the list'''
 
-        print(self.__body_position)
         for coord in self.__body_position:
             x,y = coord
             grid[x][y] = 1
