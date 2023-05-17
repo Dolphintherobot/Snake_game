@@ -6,20 +6,6 @@ import random as rn
 
 
 
-def get_coordinates():
-    '''Purpose:to get the position of the players mouse
-    :return y: the position of the click on the gui on the y axis
-    :return x: the coordinate of the click on the gui on the x axis '''
-    player_position = pygame.mouse.get_pos()
-    x = player_position[1]
-    y = player_position[0]
-    return (x,y)
-
-
-
-
-
-
 def generate_apple(grid,apple_list):
     """Purpose: to generate an x,y coordinate to mark as an apple for the snake to pick up
     :param grid: 2d list representing the game board
@@ -121,13 +107,13 @@ def main(grid):
     direction = "right"
     n = 0
 
+    pygame.time.set_timer(5000)
+
     while not done:
         for event in pygame.event.get():
             cover_tail(a_snake.tail,grid)
             if event.type == pygame.QUIT:
                 done = True
-            elif event.type ==pygame.MOUSEBUTTONDOWN:
-                mouse_x,mouse_y = get_coordinates()
             elif event.type == pygame.K_LEFT or direction == "left":
                 a_snake.move_left()
                 direction = "left"
@@ -151,10 +137,11 @@ def main(grid):
         
         if a_snake.game_over():
             done = True
+            print("Out of bounds")
 
 
 
-
+        a_snake.place_snake(grid)
         BLACK = (0,0,0)
         BLUE = (0,0,255)
         screen.fill(BLACK)
