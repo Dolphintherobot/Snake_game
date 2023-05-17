@@ -107,7 +107,6 @@ def main(grid):
     direction = "right"
     n = 0
 
-    pygame.time.set_timer(5000)
 
     while not done:
         for event in pygame.event.get():
@@ -136,7 +135,7 @@ def main(grid):
             generate_apple(grid)
             n = 0
         
-        if a_snake.game_over():
+        if a_snake.game_over(grid):
             done = True
             print("Out of bounds")
 
