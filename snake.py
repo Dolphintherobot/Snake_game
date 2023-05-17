@@ -96,7 +96,7 @@ class Snake:
         copy = valid_spaces.copy()
         for space in copy:
             x,y  = space
-            if  0 > x > n or 0 >y > m or space in self.__body_position:
+            if  0 > x > n -1 or 0 > y > m - 1 or space in self.__body_position:
                 valid_spaces.remove(space)
         
         return valid_spaces
@@ -138,6 +138,7 @@ class Snake:
         :param grid: a 2d list
         :Post-condition: will modify the contents of the list'''
 
+        print(self.__body_position)
         for coord in self.__body_position:
             x,y = coord
             grid[x][y] = 1
