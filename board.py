@@ -125,8 +125,8 @@ def main(grid):
 
     has_moved = False
     while not done:
+        previous_tail = a_snake.tail
         for event in pygame.event.get():
-            cover_tail(a_snake.tail,grid)
             if event.type == pygame.QUIT:
                 done = True
 
@@ -144,7 +144,6 @@ def main(grid):
                     direction = "down"
                     has_moved = True
                 elif event.key == pygame.K_UP:
-                    print(pygame.K_UP)
                     a_snake.move_up()
                     direction = "up"
                     has_moved = True
@@ -165,18 +164,17 @@ def main(grid):
         
         if a_snake.game_over(grid):
             done = True
-            print("Out of bounds")
             continue
 
-
-
+        cover_tail(previous_tail,grid)
         a_snake.place_snake(grid)
+        
         BLACK = (0,0,0)
         BLUE = (0,0,255)
         screen.fill(BLACK)
         draw_squares(screen,grid,height,width,margin)
         pygame.display.flip()
-        pygame.time.wait(2000)
+        pygame.time.wait(500)
         clock.tick(60)
         n +=1
  
