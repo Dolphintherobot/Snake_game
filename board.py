@@ -45,6 +45,22 @@ def cover_tail(tail,grid):
 
 
 
+def default_move(direction,snake):
+    '''Purpose:to move the snake in a direction if the player has not selected a key
+    :param direction: string that can be 4 words: up,down,left or right
+    :param snake: a snake object'''
+
+    if direction == "right":
+        snake.move_right()
+    elif direction == "left":
+        snake.move_left()
+    elif direction == "up":
+        snake.move_up()
+    else:
+        snake.move_down()
+
+
+
 def draw_squares(screen,grid,height,width,margin):
     ''''Purpose: to draw the squares into the gui
     :parm screen: the display being drawn onto
@@ -107,25 +123,34 @@ def main(grid):
     direction = "right"
     n = 0
 
-
+    has_moved = False
     while not done:
         for event in pygame.event.get():
             pygame.time.set_timer(event,5000)
             cover_tail(a_snake.tail,grid)
             if event.type == pygame.QUIT:
                 done = True
-            elif event.type == pygame.K_LEFT or direction == "left":
+                has_moved = True
+            elif event.type == pygame.K_LEFT:
                 a_snake.move_left()
                 direction = "left"
-            elif event.type == pygame.K_RIGHT or direction == "right":
+                has_moved = True
+            elif event.type == pygame.K_RIGHT:
                 a_snake.move_right()
                 direction = "right"
-            elif event.type == pygame.K_DOWN or direction == "down":
+                has_moved = True
+            elif event.type == pygame.K_DOWN:
                 a_snake.move_down()
                 direction = "down"
-            elif event.type == pygame.K_UP or direction == "up":
+                has_moved = True
+            elif event.type == pygame.K_UP:
                 a_snake.move_up()
                 direction = "up"
+                has_moved = True
+        
+
+        if not has_moved:
+            default_move(direction,a_snake)
 
         if on_apple(a_snake.head,list_of_apples):
             list_of_apples.remove(a_snake.head)
@@ -138,6 +163,7 @@ def main(grid):
         if a_snake.game_over(grid):
             done = True
             print("Out of bounds")
+            continue
 
 
 
