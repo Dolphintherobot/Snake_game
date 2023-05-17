@@ -157,7 +157,7 @@ def main(grid):
             a_snake.grow()
         
         if n ==3:
-            generate_apple(grid)
+            generate_apple(grid,list_of_apples)
             n = 0
         
         if a_snake.game_over(grid):
