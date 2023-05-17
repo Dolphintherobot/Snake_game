@@ -41,7 +41,7 @@ def cover_tail(tail,grid):
     :Post-conditions:will modify the board
     """
     x,y = tail
-    grid[x][y] = 2
+    grid[x][y] = 0
 
 
 
